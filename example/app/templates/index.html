@@ -10,7 +10,8 @@
 	</head>
 	<body>
 		<div class="container">
-			<h3>Books</h3>
+			<h3>Django export XLS</h3>
+			<strong>Books:</strong>
 			<ul>
 			{% for obj in obj_list %}
 				<li>{{ obj.name }} - ${{ obj.price }} -  by <small>{{ obj.author.get_full_name }}</small></li>
