@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <meta name="description" content="">
+	    <meta name="author" content="">
+		<title>Django export xls</title>
+		<link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.png">
+    	<link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="container">
+			<h3>Books</h3>
+			<ul>
+			{% for obj in obj_list %}
+				<li>{{ obj.name }} - ${{ obj.price }} -  by <small>{{ obj.author.get_full_name }}</small></li>
+			{% endfor %}
+			</ul>
+			<a href="{% url 'export_xls' %}" class="btn btn-success">Exportar xls</a>
+		</div>
+		<hr>
+		<footer>Developed by <a href="http://daiech.com">Daiech</a></footer>
+	</body>
+</html>
