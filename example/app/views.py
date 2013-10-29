@@ -10,10 +10,14 @@ def home(request):
 
 
 @login_required
-def export_xls(request):
+def export_xls(request, id_user=False):
     from export_xls.views import export_xlwt
     fields = ["id", "name", "author", "price"]
-    queryset = Book.objects.filter(author=request.user)
+    if id_user:
+        from django.contrib.auth.models import User
+        queryset = Book.objects.filter(author=User.objects.get(pk=id_user))
+    else:
+    	queryset = Book.objects.all()
     try:
         return export_xlwt(Book, fields, queryset.values_list(*fields))
     except Exception, e:

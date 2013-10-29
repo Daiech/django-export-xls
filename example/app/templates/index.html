@@ -16,7 +16,12 @@
 				<li>{{ obj.name }} - ${{ obj.price }} -  by <small>{{ obj.author.get_full_name }}</small></li>
 			{% endfor %}
 			</ul>
-			<a href="{% url 'export_xls' %}" class="btn btn-success">Exportar xls</a>
+			<a href="{% url 'export' %}" class="btn btn-success">Export all books</a>
+			{% if user.is_authenticated %}
+			<a href="{% url 'export' user.pk %}" class="btn btn-success">Export your books</a>
+			{% else %}
+			<a href="{% url 'login' %}">Login to export your books</a>
+			{% endif %}
 		</div>
 		<hr>
 		<footer>Developed by <a href="http://daiech.com">Daiech</a></footer>

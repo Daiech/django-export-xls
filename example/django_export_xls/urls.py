@@ -7,7 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'app.views.home', name='home'),
-    url(r'^export_xls$', 'app.views.export_xls', name='export_xls'),
+    url(r'^app/', include('app.urls')),
+    url(r'^export_xls/', include('export_xls.urls')),
     # url(r'^django_export_xls/', include('django_export_xls.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

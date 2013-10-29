@@ -122,7 +122,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
-    'app'
+    'app',
+    'export_xls'
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
