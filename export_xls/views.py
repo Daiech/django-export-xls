@@ -5,11 +5,11 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 
 
-def export_xlwt(model, fields, values_list, save=False, folder=""):
+def export_xlwt(filename, fields, values_list, save=False, folder=""):
     """export_xlwt is a function based on http://reliablybroken.com/b/2009/09/outputting-excel-with-django/"""
-    modelname = slugify(model._meta.verbose_name_plural.lower())
+    filename = slugify(filename)
     book = xlwt.Workbook(encoding='utf8')
-    sheet = book.add_sheet(modelname)
+    sheet = book.add_sheet(filename)
 
     default_style = xlwt.Style.default_style
     datetime_style = xlwt.easyxf(num_format_str='dd/mm/yyyy hh:mm')
@@ -31,13 +31,13 @@ def export_xlwt(model, fields, values_list, save=False, folder=""):
 
     if not save:
         response = HttpResponse(mimetype='application/vnd.ms-excel')
-        response['Content-Disposition'] = 'attachment; filename=%s.xls' % modelname
+        response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
     else:
         dirpath = '%s/%s' % (settings.MEDIA_ROOT, folder)
         if folder != "":
             import os
             if not os.path.exists(dirpath):
                 os.makedirs(dirpath)
-        response = '%s%s.xls' % (dirpath, modelname)
+        response = '%s%s.xls' % (dirpath, filename)
     book.save(response)
     return response
