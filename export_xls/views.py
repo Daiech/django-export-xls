@@ -1,11 +1,12 @@
 from django.http import HttpResponse
 import xlwt
 from datetime import datetime, date
+from django.template.defaultfilters import slugify
 
 
 def export_xlwt(model, fields, values_list):
     """export_xlwt is a function based on http://reliablybroken.com/b/2009/09/outputting-excel-with-django/"""
-    modelname = model._meta.verbose_name_plural.lower()
+    modelname = slugify(model._meta.verbose_name_plural.lower())
     book = xlwt.Workbook(encoding='utf8')
     sheet = book.add_sheet(modelname)
 
