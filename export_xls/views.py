@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 from django.conf import settings
 
 
-def export_xlwt(model, fields, values_list, save=False):
+def export_xlwt(model, fields, values_list, save=False, folder=""):
     """export_xlwt is a function based on http://reliablybroken.com/b/2009/09/outputting-excel-with-django/"""
     modelname = slugify(model._meta.verbose_name_plural.lower())
     book = xlwt.Workbook(encoding='utf8')
@@ -33,6 +33,11 @@ def export_xlwt(model, fields, values_list, save=False):
         response = HttpResponse(mimetype='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment; filename=%s.xls' % modelname
     else:
-        response = '%s/%s.xls' % (settings.MEDIA_ROOT, modelname)
+        dirpath = '%s/%s' % (settings.MEDIA_ROOT, folder)
+        if folder != "":
+            import os
+            if not os.path.exists(dirpath):
+                os.makedirs(dirpath)
+        response = '%s%s.xls' % (dirpath, modelname)
     book.save(response)
     return response
