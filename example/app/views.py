@@ -19,7 +19,7 @@ def export_xls(request, id_user=False):
     else:
     	queryset = Book.objects.all()
     try:
-        return export_xlwt(Book, fields, queryset.values_list(*fields))
+        return export_xlwt(Book._meta.verbose_name_plural.lower(), fields, queryset.values_list(*fields))
     except Exception, e:
         raise e
 
