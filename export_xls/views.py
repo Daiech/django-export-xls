@@ -2,9 +2,10 @@ from django.http import HttpResponse
 import xlwt
 from datetime import datetime, date
 from django.template.defaultfilters import slugify
+from django.conf import settings
 
 
-def export_xlwt(model, fields, values_list):
+def export_xlwt(model, fields, values_list, save=False):
     """export_xlwt is a function based on http://reliablybroken.com/b/2009/09/outputting-excel-with-django/"""
     modelname = slugify(model._meta.verbose_name_plural.lower())
     book = xlwt.Workbook(encoding='utf8')
@@ -28,7 +29,10 @@ def export_xlwt(model, fields, values_list):
 
             sheet.write(row + 1, col, val, style=style)
 
-    response = HttpResponse(mimetype='application/vnd.ms-excel')
-    response['Content-Disposition'] = 'attachment; filename=%s.xls' % modelname
+    if not save:
+        response = HttpResponse(mimetype='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=%s.xls' % modelname
+    else:
+        response = '%s/%s.xls' % (settings.MEDIA_ROOT, modelname)
     book.save(response)
     return response

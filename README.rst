@@ -1,10 +1,16 @@
-=====
+=================
 Django Export XLS
-=====
+=================
 
 Django Export XLS is a simple Django app to export data to a xls file.
 
 Detailed documentation is in the "docs" directory.
+
+Instalation
+-----------
+
+	  $ pip install django-export-xls
+
 
 Quick start
 -----------
@@ -20,4 +26,3 @@ Quick start
 
       url(r'^export_xls/', include('export_xls.urls')),
 
-3. 
