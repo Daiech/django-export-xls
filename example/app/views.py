@@ -15,11 +15,14 @@ def export_xls(request, id_user=False):
     fields = ["id", "name", "author", "price"]
     if id_user:
         from django.contrib.auth.models import User
-        queryset = Book.objects.filter(author=User.objects.get(pk=id_user))
+        _user = User.objects.get(pk=id_user)
+        queryset = Book.objects.filter(author=_user)
+        filename = "%ss-%s" %(_user.username, Book._meta.verbose_name_plural.lower())
     else:
-    	queryset = Book.objects.all()
+        queryset = Book.objects.all()
+        filename = Book._meta.verbose_name_plural.lower()
     try:
-        return export_xlwt(Book._meta.verbose_name_plural.lower(), fields, queryset.values_list(*fields))
+        return export_xlwt(filename, fields, queryset.values_list(*fields))
     except Exception, e:
         raise e
 
