@@ -32,12 +32,14 @@ def export_xlwt(filename, fields, values_list, save=False, folder=""):
     if not save:
         response = HttpResponse(mimetype='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
+        book.save(response)
+        return response
     else:
         dirpath = '%s/%s' % (settings.MEDIA_ROOT, folder)
         if folder != "":
             import os
             if not os.path.exists(dirpath):
                 os.makedirs(dirpath)
-        response = '%s%s.xls' % (dirpath, filename)
-    book.save(response)
-    return response
+        filepath = '%s%s.xls' % (dirpath, filename)
+        book.save(filepath)
+        return "%s%s%s.xls" % (settings.MEDIA_URL, folder, filename)
