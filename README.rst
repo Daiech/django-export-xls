@@ -69,6 +69,9 @@ eg::
       return export_xlwt(filename, fields, values_list, save=True, folder="xls/")
 
 
+Example
+-------
+
 view the real example. Clone de github repo::
 
       git clone https://github.com/Daiech/django-export-xls
