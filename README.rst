@@ -24,8 +24,14 @@ Quick start
           'export_xls',
       )
 
+2. Be sure to have the MEDIA_ROOT and MEDIA_URL vars defined. eg::
 
-2. The only thing that you must to do is create an excel file is::
+      import os
+      MEDIA_ROOT = os.sep.join([os.path.dirname(os.path.dirname(__file__)), 'media'])
+      MEDIA_URL = '/media/'
+
+
+3. The only thing that you must to do is create an excel file is::
 
       * Define a name for your file
       * Define a Python list with the fields you want in your excel (xls headers).
@@ -35,34 +41,43 @@ Quick start
 How to use
 ----------
 
-* Import function::
+* Import the function::
 
       from export_xls.views import export_xlwt
 
-* export_xlwt receive:
+* 'export_xlwt' function needs:
 
-  3 mandatory parameters::
+    3 mandatory parameters::
 
       filename
-      fields
-      values_list
+      fields
+      values_list
 
-  2 optional parameters::
+    2 optional parameters::
 
       save   : save the xls file on settings.MEDIA_ROOT
-      folder : save the xls file on settings.MEDIA_ROOT/folder
+      folder : save the xls file on settings.MEDIA_ROOT/folder 
 
+* 'export_xlwt' function return the string::
+
+      MEDIA_URL + folder + filename 
+      eg: /media/xls/filename.xls
 
 Example
 -------
-clone de github repo::
+
+      from export_xls.views import export_xlwt
+      return export_xlwt(filename, fields, values_list, save=True, folder="xls/")
+
+
+view the real example. Clone de github repo::
 
       git clone https://github.com/Daiech/django-export-xls
       cd django-export-xls/example
       python manage.py runserver
 
 
-Credentians for database:
+    Credentians for database:
 
-* user: daiech
-* pass: 1
+      * user: daiech
+      * pass: 1
