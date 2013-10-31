@@ -63,8 +63,7 @@ How to use
       MEDIA_URL + folder + filename 
       eg: /media/xls/filename.xls
 
-Example
--------
+eg::
 
       from export_xls.views import export_xlwt
       return export_xlwt(filename, fields, values_list, save=True, folder="xls/")
@@ -77,7 +76,7 @@ view the real example. Clone de github repo::
       python manage.py runserver
 
 
-    Credentians for database:
+Credentians for database::
 
       * user: daiech
       * pass: 1
