@@ -37,7 +37,7 @@ How to use
 
 * Import function::
 
-      import from export_xls.views export_xlwt
+      from export_xls.views import export_xlwt
 
 * export_xlwt receive:
 
@@ -49,5 +49,20 @@ How to use
 
   2 optional parameters::
 
-      save # save the xls file on settings.MEDIA_ROOT
-      folder # save the xls file on settings.MEDIA_ROOT/folder
+      save   : save the xls file on settings.MEDIA_ROOT
+      folder : save the xls file on settings.MEDIA_ROOT/folder
+
+
+Example
+-------
+clone de github repo::
+
+      git clone https://github.com/Daiech/django-export-xls
+      cd django-export-xls/example
+      python manage.py runserver
+
+
+Credentians for database:
+
+* user: daiech
+* pass: 1
