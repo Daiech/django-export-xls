@@ -30,7 +30,7 @@ def export_xlwt(filename, fields, values_list, save=False, folder=""):
             sheet.write(row + 1, col, val, style=style)
 
     if not save:
-        response = HttpResponse(mimetype='application/vnd.ms-excel')
+        response = HttpResponse(content_type='application/vnd.ms-excel')
         response['Content-Disposition'] = 'attachment; filename=%s.xls' % filename
         book.save(response)
         return response
